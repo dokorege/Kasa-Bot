@@ -1,6 +1,4 @@
 import asyncio
-from asyncio.events import get_event_loop
-from discord.ext import commands, tasks 
 import discord
 from discord import message
 import random
@@ -37,6 +35,11 @@ def fox():
 def waifu_choices():
     return f'SFW Categories:\n***Waifu Neko Shinobu Megumin\nBully Cuddle Cry Hug\nAwoo Kiss Lick Pat\nSmug Bonk Yeet Blush\nSmile Wave High Five\nHandhold Nom Bite Glomp\nSlap Kill Kick Happy\nWink Poke Dance Cringe***\n\nNSFW Choices:\n***Waifu Trap Neko Blowjob ***'
 
+
+def ben():
+    ben_choices = ['<a:BenYes:988332589548974080> Yes', '<a:BenNo:988332588160659516> No', '<a:BenLaugh:988332590501072926> HoHoHo', '<a:BenUgh:988332591297990677> Ugh', '<a:BenHangup:988332591767769119> ...']
+    return random.choice(ben_choices)
+
 class MyClient(discord.Client):
     
     async def on_ready(self):
@@ -58,6 +61,11 @@ class MyClient(discord.Client):
         if message.content.startswith('!anime_quote'):
             await message.channel.send(quotes())
 
+        if message.content.lower().startswith('yo ben') and len(message.content.lower()) == 6:
+             await message.reply('<a:BenPickup:988336120095997972> Ben', mention_author=True)
+        
+        if message.content.lower().startswith('yo ben') and len(message.content.lower()) > 6:
+            await message.reply(ben(), mention_author=True)
      # -----------------------------------------------------------------------------------------------------------------
 
         async def dice_roll():
